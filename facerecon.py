@@ -15,9 +15,9 @@ class FaceRecognition():
             count = count + 1
             sec = sec + frameRate
             sec = round(sec, 2)
-            success = self._getFrame(sec)
+            success = self._getFrame(sec, count)
 
-    def _getFrame(sec, count):
+    def _getFrame(self, sec, count):
         self.vidcap.set(cv2.CAP_PROP_POS_MSEC,sec*1000)
         hasFrames,image = self.vidcap.read()
         if hasFrames:
@@ -25,6 +25,8 @@ class FaceRecognition():
             faces = self.face_cascade.detectMultiScale(gray, 1.2, 5)
             for (x, y, w, h) in faces:
                 cv2.rectangle(image, (x, y), (x+w, y+h), (255, 0, 0), 2)
+                cropped = image[y:y+h, x:x+h]
+                cv2.imwrite("crop/face" + str(count)+ ".jpg", cropped)
             
             profiles = self.profile_cascade.detectMultiScale(gray, 1.2, 5)
             for (x, y, w, h) in profiles:
@@ -35,3 +37,6 @@ class FaceRecognition():
             # get_faces(img_name)
             # cv2.imwrite("images/image"+str(count)+".jpg", image)     # save frame as JPG file
         return hasFrames
+
+
+fr = FaceRecognition('tbbt_science.mp4')
