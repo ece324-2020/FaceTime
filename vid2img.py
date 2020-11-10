@@ -1,6 +1,6 @@
 import cv2
 from faces import get_faces
-vidcap = cv2.VideoCapture('ep1.mkv')
+vidcap = cv2.VideoCapture('tbbt_science.mp4')
 face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
 profile_cascade = cv2.CascadeClassifier('haarcascade_profileface.xml')
 
@@ -27,7 +27,9 @@ sec = 500# 30*60 + 34
 frameRate = 1.0/2#4.0 #0.041666 #//it will capture image in each 1/24 second
 count=1
 success = getFrame(sec)
+print('s')
 while success:
+	print('h')
 	count = count + 1
 	sec = sec + frameRate
 	# sec = round(sec, 2)
