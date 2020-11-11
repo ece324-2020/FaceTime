@@ -31,7 +31,7 @@ class System:
                     if currprob > maxprob[0]: 
                         maxprob[0] = currprob
                         maxprob[1] = str(model)
-            actorTime = self.minutes[maxprob[1] #some stupid immutability with python dicts lmao
+            actorTime = self.minutes[maxprob[1]] #some stupid immutability with python dicts lmao
             self.minutes[maxprob[1]] = actorTime + int(currtime)
 
     def _load_images(self, currtime):
