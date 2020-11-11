@@ -1,5 +1,7 @@
 import cv2
-from faces import get_faces
+import scipy.io as sio
+import os
+from centerface import CenterFace
 
 class FaceRecognition(): 
     def __init__(self, video: str, fullpic=False):
