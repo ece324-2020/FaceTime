@@ -71,17 +71,44 @@ def getFrame(sec):
 			x, y, w, h = boxes[0], boxes[1], boxes[2], boxes[3]
 			cropped = image[y:y+h, x:x+h]
 			cv2.imwrite("crop/face" + str(count)+ ".jpg", cropped)
+			cv2.imshow('')
 		img_name = "images/image"+str(count)+".jpg"
 		cv2.imwrite(img_name, image)     # save frame as JPG file
 	return hasFrames	
 
-sec = 0
-frameRate = 1 #//it will capture image in each 0.5 second
-count=1
-success = getFrame(sec)
-while success:
-    count = count + 1
-    sec = sec + frameRate
-    sec = round(sec, 2)
-    success = getFrame(sec)
+
+def checkimg():
+	image = cv2.imread('picture1.jpg')
+	detector = MTCNN()
+	hasFrames = True
+	count = 1
+	if hasFrames:
+		gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+		res = detector.detect_faces(image)
+		for item in res:
+			# itemJ = json.load(item)
+			boxes = item['box']
+			x, y, w, h = boxes[0], boxes[1], boxes[2], boxes[3]
+			cropped = image[y:y+h, x:x+h]
+			print(x, y, w, h)
+			cv2.imwrite("crop/face" + str(count)+ ".jpg", cropped)
+			cv2.imshow('crop', cropped)
+		img_name = "images/image"+str(count)+".jpg"
+		cv2.imwrite(img_name, image)     # save frame as JPG file
+		cv2.waitKey(0)
+	return hasFrames	
+
+
+
+# sec = 0
+# frameRate = 1 #//it will capture image in each 0.5 second
+# count=1
+# success = getFrame(sec)
+# while success:
+#     count = count + 1
+#     sec = sec + frameRate
+#     sec = round(sec, 2)
+#     success = getFrame(sec)
+
+checkimg()
 

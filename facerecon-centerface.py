@@ -17,9 +17,9 @@ class FaceRecognition():
             sec = round(sec, 2)
             success = self._getFrame(sec, count)
     
-    def _getFrame(sec, count):
-        vidcap.set(cv2.CAP_PROP_POS_MSEC,sec*1000)
-        hasFrames,image = vidcap.read()
+    def _getFrame(self, sec, count):
+        self.vidcap.set(cv2.CAP_PROP_POS_MSEC,sec*1000)
+        hasFrames,image = self.vidcap.read()
         if hasFrames:
             h, w = image.shape[:2]
             landmarks = True

@@ -16,9 +16,9 @@ class FaceRecognition():
             sec = round(sec, 2)
             success = self._getFrame(sec, count)
     
-    def _getFrame(sec, count):
-        vidcap.set(cv2.CAP_PROP_POS_MSEC,sec*1000)
-        hasFrames,image = vidcap.read()
+    def _getFrame(self, sec, count):
+        self.vidcap.set(cv2.CAP_PROP_POS_MSEC,sec*1000)
+        hasFrames,image = self.vidcap.read()
         detector = MTCNN()
         if hasFrames:
             gray = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
@@ -27,7 +27,7 @@ class FaceRecognition():
                 # itemJ = json.load(item)
                 boxes = item['box']
                 x, y, w, h = boxes[0], boxes[1], boxes[2], boxes[3]
-                cropped = image[y:y+w, x:x+h]
+                cropped = image[y:y+h, x:x+h]
                 cv2.imwrite("crop/face" + str(count)+ ".jpg", cropped)
             if self.fullpic:
                 img_name = "images/image"+str(count)+".jpg"
