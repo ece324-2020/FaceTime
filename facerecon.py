@@ -2,10 +2,11 @@ import cv2
 from faces import get_faces
 
 class FaceRecognition(): 
-    def __init__(self, video: str):
+    def __init__(self, video: str. fullpic=False):
         self.vidcap = cv2.VideoCapture(video)
         self.face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
         self.profile_cascade = cv2.CascadeClassifier('haarcascade_profileface.xml')
+        self.fullpic = fullpic
     
         sec = 0
         frameRate = 1 #//it will capture image in each 0.5 second
@@ -31,9 +32,12 @@ class FaceRecognition():
             profiles = self.profile_cascade.detectMultiScale(gray, 1.2, 5)
             for (x, y, w, h) in profiles:
                 cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
+                cropped = image[y:y+h, x:x+h]
+                cv2.imwrite("side/face" + str(count)+ ".jpg", cropped)
             
-            img_name = "images/image"+str(count)+".jpg"
-            cv2.imwrite(img_name, image)     # save frame as JPG file
+            if self.fullpic:
+                img_name = "images/image"+str(count)+".jpg"
+                cv2.imwrite(img_name, image)     # save frame as JPG file
             # get_faces(img_name)
             # cv2.imwrite("images/image"+str(count)+".jpg", image)     # save frame as JPG file
         return hasFrames
