@@ -3,3 +3,5 @@ images/*
 *.jpg
 crop/*
 *.zip
+.DS_Store
+env/lib/*
