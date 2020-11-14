@@ -2,6 +2,7 @@ import cv2
 import scipy.io as sio
 import os
 from centerface import CenterFace
+import uuid
 
 class FaceRecognition(): 
     def __init__(self, video: str, fullpic=False):
@@ -33,7 +34,8 @@ class FaceRecognition():
                 boxes, score = det[:4], det[4]
                 x, y, dx, dy = int(boxes[0]), int(boxes[1]), int(boxes[2]), int(boxes[3])
                 cropped = image[y:dy, x:dx]
-                cv2.imwrite("crop/face" + str(count)+ ".jpg", cropped)
+                if cropped.size != 0: 
+                    cv2.imwrite("crop/face" + str(count)+ '_' + str(uuid.uuid1())+".jpg", cropped)
             if self.fullpic:
                 cv2.imwrite("images/image"+str(count)+".jpg", image)     # save frame as JPG file
         return hasFrames	

@@ -1,6 +1,7 @@
 import cv2
 from faces import get_faces
 from mtcnn import MTCNN
+import uuid
 
 class FaceRecognition(): 
     def __init__(self, video: str, fullpic=False):
@@ -28,7 +29,8 @@ class FaceRecognition():
                 boxes = item['box']
                 x, y, w, h = boxes[0], boxes[1], boxes[2], boxes[3]
                 cropped = image[y:y+h, x:x+h]
-                cv2.imwrite("crop/face" + str(count)+ ".jpg", cropped)
+                if cropped.size != 0: 
+                    cv2.imwrite("crop/face" + str(count)+ '_' + str(uuid.uuid1())+".jpg", cropped)
             if self.fullpic:
                 img_name = "images/image"+str(count)+".jpg"
                 cv2.imwrite(img_name, image)     # save frame as JPG file

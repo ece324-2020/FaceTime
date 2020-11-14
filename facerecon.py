@@ -1,8 +1,9 @@
 import cv2
 from faces import get_faces
+import uuid
 
 class FaceRecognition(): 
-    def __init__(self, video: str. fullpic=False):
+    def __init__(self, video: str, fullpic=False):
         self.vidcap = cv2.VideoCapture(video)
         self.face_cascade = cv2.CascadeClassifier('haarcascade_frontalface_default.xml')
         self.profile_cascade = cv2.CascadeClassifier('haarcascade_profileface.xml')
@@ -27,13 +28,15 @@ class FaceRecognition():
             for (x, y, w, h) in faces:
                 cv2.rectangle(image, (x, y), (x+w, y+h), (255, 0, 0), 2)
                 cropped = image[y:y+h, x:x+h]
-                cv2.imwrite("crop/face" + str(count)+ ".jpg", cropped)
+                if cropped.size != 0: 
+                    cv2.imwrite("crop/face" + str(count)+ '_' + str(uuid.uuid1())+".jpg", cropped)
             
             profiles = self.profile_cascade.detectMultiScale(gray, 1.2, 5)
             for (x, y, w, h) in profiles:
                 cv2.rectangle(image, (x, y), (x+w, y+h), (0, 255, 0), 2)
                 cropped = image[y:y+h, x:x+h]
-                cv2.imwrite("side/face" + str(count)+ ".jpg", cropped)
+                if cropped.size != 0: 
+                    cv2.imwrite("side/face" + str(count)+ '_' + str(uuid.uuid1())+".jpg", cropped)
             
             if self.fullpic:
                 img_name = "images/image"+str(count)+".jpg"
