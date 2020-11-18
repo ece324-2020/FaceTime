@@ -48,6 +48,6 @@ end_time = float(sys.argv[2])
 print (start_time, end_time)
 
 start = time()
-fr = FaceRecognition('tbbt_science.mp4', start_time, end_time)
+fr = FaceRecognition('bbt.m4v', start_time, end_time)
 
 print (time()-start)
