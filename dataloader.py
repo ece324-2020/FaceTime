@@ -10,12 +10,10 @@ from torch.utils.data.sampler import SubsetRandomSampler
 
 '''
 THIS DOES NOT INHERIT FROM THE DATALOADER CLASS! YOU CAN JUST INSTANTIATE AND CALL THE TRAIN, TEST AND VALID
-
 datasetobject = FacialRecognitialDataset()
 trainData = datasetobject.train
 validData = datasetobject.valid
 testData = datasetobject.test
- 
 '''
 class FacialRecognitialDataset:
     def __init__(self, transformation = None, root='.', validSize=0.2, trainSize=0.7, testSize=0.1,
