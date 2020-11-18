@@ -44,16 +44,19 @@ class FaceRecognition():
                 cv2.imwrite("images/image"+str(count)+".jpg", image)     # save frame as JPG file
         return hasFrames	
 
+if __name__ == "__main__":
+    from time import time
+    start_time = float(sys.argv[1])
+    end_time = float(sys.argv[2])
+    videoName = str(sys.argv[3])
+    
+    print(videoName)
+    # videoName = 'tbbt_s1e1.mp4'
+    # start_time = 0
+    # end_time = 30
+    print (start_time, end_time)
 
-from time import time
-start_time = float(sys.argv[1])
-end_time = float(sys.argv[2])
-videoName = str(sys.argv[3])
-# start_time = 0
-# end_time = 30
-print (start_time, end_time)
+    start = time()
+    fr = FaceRecognition(videoName, start_time, end_time)
 
-start = time()
-fr = FaceRecognition(videoName, start_time, end_time)
-
-print (time()-start)
+    print(time()-start)
