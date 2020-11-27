@@ -26,7 +26,7 @@ class FaceRecognition():
             success = self._getFrame(sec, count)
             
             if sec >= end:
-                self.track.to_csv('track.csv', index=False)
+                self.track.to_csv('track_{}_s{}_e{}.csv'.format(video.split('.')[0], start, end), index=False)
                 break
     
     def _getFrame(self, sec, count):
