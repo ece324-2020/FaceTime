@@ -1,6 +1,6 @@
 # FaceTime
 
-## To Build
+## Build
 
 `cd env/`
 
@@ -12,6 +12,7 @@ if you add more dependancies run: `pip freeze > requirements.txt`
 
 Once you're finished working with the virtual env run: `deactivate`
 
+## Run
 
 `baseline.ipynb` contains the code to run the baseline model
 
