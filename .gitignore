@@ -1,0 +1,10 @@
+images/*
+*.mp4
+*.jpg
+crop/*
+*.zip
+.DS_Store
+env/lib/*
+nohup.out
+*.out
+*.m4v
